@@ -1,0 +1,27 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+name: trigger-publish-test-results-action
+kind: workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Junit-Test:
+    steps:
+      - name: checkout-source-code
+        uses: cloudbees-io/checkout@v1
+
+      - name: Install gotestsum and Run Tests
+        run: |
+          go install gotest.tools/gotestsum@latest
+          export PATH=$PATH:$(go env GOPATH)/bin
+          mkdir -p test-results
+          gotestsum --junitfile test-results/test-report.xml
+
+      - name: Junit
+        uses: cloudbees-io/publish-test-results@v1
+        with:
+          test-type: go
+          folder-name: test-results/test-report.xml
