@@ -20,8 +20,11 @@ jobs:
           mkdir -p test-results
           gotestsum --junitfile test-results/test-report.xml
 
-      - name: Junit
-        uses: cloudbees-io/publish-test-results@v1
-        with:
-          test-type: go
-          folder-name: ${{ cloudbees.workspace }}/test-results/test-report.xml
+      - name: Print Test Results XML
+        run: cat test-results/test-report.xml
+
+      # - name: GO
+      #   uses: cloudbees-io/publish-test-results@v1
+      #   with:
+      #     test-type: go
+      #     folder-name: ${{ cloudbees.workspace }}/test-results/test-report.xml
