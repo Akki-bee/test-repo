@@ -22,9 +22,6 @@ jobs:
           gotestsum --junitfile test-results/test-report.xml
           cat test-results/test-report.xml
 
-      # - name: Print Test Results XML
-      #   run: cat test-results/test-report.xml
-
       - name: GO
         uses: cloudbees-io/publish-test-results@v1
         with:
