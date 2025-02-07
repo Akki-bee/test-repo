@@ -20,9 +20,10 @@ jobs:
           export PATH=$PATH:$(go env GOPATH)/bin
           mkdir -p test-results
           gotestsum --junitfile test-results/test-report.xml
+          cat test-results/test-report.xml
 
-      - name: Print Test Results XML
-        run: cat test-results/test-report.xml
+      # - name: Print Test Results XML
+      #   run: cat test-results/test-report.xml
 
       # - name: GO
       #   uses: cloudbees-io/publish-test-results@v1
